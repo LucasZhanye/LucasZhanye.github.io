@@ -6,14 +6,6 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 25 Apr 2024 18:53:46 &#43;0800</lastBuildDate>
             <atom:link href="https://LucasZhanye.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Hugo搭建个人博客</title>
-    <link>https://LucasZhanye.github.io/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-    <pubDate>Thu, 25 Apr 2024 18:49:32 &#43;0800</pubDate>
-    <author>LucasZhang</author>
-    <guid>https://LucasZhanye.github.io/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
-    <description><![CDATA[很长一段时间没有整博客，也没时间写博客，最近又重新捣鼓上了，还是觉得得自己搭一个，这次选择的是Hugo这个静态站点生成器，结合Github就]]></description>
-</item>
-<item>
     <title>测试</title>
     <link>https://LucasZhanye.github.io/%E6%B5%8B%E8%AF%95/</link>
     <pubDate>Mon, 22 Apr 2024 23:03:59 &#43;0800</pubDate>
