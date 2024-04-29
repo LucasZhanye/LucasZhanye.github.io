@@ -692,7 +692,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 因此我们需要借助一个平台来部署我们的博客，这里选择了Github Page，好像Gitee也是可以的，不过没试过，感兴趣可以去试试看哈。
 
 其实最简单粗暴的方法可以很简单：
-##### 5.1 创建一个Github仓库
+#### 5.1 创建一个Github仓库
 第一步，先到Github中创建一个仓库，仓库名称为`XXX.github.io`（XXX为你Github账号的用户名，替换即可），权限为`public`
 
 #### 5.2 上传
@@ -711,7 +711,7 @@ git push -u origin master
 以后你想要发布博客，那你就得经历以下几个步骤哈：
 1. 本地生成博客文件(xxx.md)，编辑
 2. 本地运行看看效果，记得将draft改为true
-3. 或者执行hugo命令进行部署
+3. 执行hugo命令进行编译
 4. 进入public目录，执行git命令上传:
 	1. `git add .` 
 	2. `git commit -m "xxxx"`
