@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Hugo与Obsidian搭配食用 - LucasZhang个人博客</title><meta name="Description" content=""><meta property="og:title" content="Hugo与Obsidian搭配食用" />
+<meta property="og:description" content="1. 前言 上一篇简单记录了Hugo搭建个人博客，最后总结了发布一篇文章至少需要这几个步骤： 本地生成博客文件(xxx.md)，编辑 本地运行看看效果" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" /><meta property="og:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-25T18:53:46+08:00" />
+<meta property="article:modified_time" content="2024-04-25T18:53:46+08:00" /><meta property="og:site_name" content="LucasZhang个人博客" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta name="twitter:title" content="Hugo与Obsidian搭配食用"/>
+<meta name="twitter:description" content="1. 前言 上一篇简单记录了Hugo搭建个人博客，最后总结了发布一篇文章至少需要这几个步骤： 本地生成博客文件(xxx.md)，编辑 本地运行看看效果"/>
+<meta name="application-name" content="LucasZhang个人博客">
+<meta name="apple-mobile-web-app-title" content="LucasZhang个人博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/logo.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" /><link rel="next" href="https://LucasZhanye.github.io/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css" integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH&#43;KuXHiZWODptY5K8NF4="><link rel="stylesheet" href="/css/style.min.897bb8797133984bdbd3ac834db1a0341c66a8efd95db2216603704f28b76d77.css" integrity="sha256-iXu4eXEzmEvb06yDTbGgNBxmqO/ZXbIhZgNwTyi3bXc="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.0df5a33710e433de1f5415b1d47e4130ca7466aee5b81955f1045c4844bbb3ed.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s&#43;0="><link rel="stylesheet" href="/lib/animate/animate.min.5fbaeb9f8e25d7e0143bae61d4b1802c16ce7390b96ceb2d498b0d96ff4c853f.css" integrity="sha256-X7rrn44l1&#43;AUO65h1LGALBbOc5C5bOstSYsNlv9MhT8="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Hugo与Obsidian搭配食用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/LucasZhanye.github.io\/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8\/"
+        },"genre": "posts","keywords": "hugo, obsidian","wordcount":  4668 ,
+        "url": "https:\/\/LucasZhanye.github.io\/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8\/","datePublished": "2024-04-25T18:53:46+08:00","dateModified": "2024-04-25T18:53:46+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "LucasZhang"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="normal" data-header-mobile="normal"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="LucasZhang个人博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/logo.png"
+        data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/logo.png"
+        title="/images/logo.png" />LucasZhang个人博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa-solid fa-house'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fa-brands fa-markdown'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fa-solid fa-tags'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fa-solid fa-list'></i> 分类 </a><a class="menu-item" href="https://github.com/LucasZhanye" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="LucasZhang个人博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/logo.png"
+        data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/logo.png"
+        title="/images/logo.png" />LucasZhang个人博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa-solid fa-house'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fa-brands fa-markdown'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fa-solid fa-tags'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fa-solid fa-list'></i>分类</a><a class="menu-item" href="https://github.com/LucasZhanye" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Hugo与Obsidian搭配食用</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>LucasZhang</a>
+</span>&nbsp;<span class="post-category">收录于 <a href="/categories/hugo/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Hugo</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-25">2024-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4668 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-前言">1. 前言</a></li>
+    <li><a href="#2-解决思路">2. 解决思路</a>
+      <ul>
+        <li><a href="#21-如何自动编译">2.1 如何自动编译？</a></li>
+        <li><a href="#22-实操步骤">2.2 实操步骤</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-寻找合适的编辑器">3. 寻找合适的编辑器</a>
+      <ul>
+        <li><a href="#31-obsidian创建博客文章">3.1 Obsidian创建博客文章</a></li>
+        <li><a href="#32-obsidian-git操作">3.2 Obsidian Git操作</a></li>
+        <li><a href="#33-处理图片问题">3.3 处理图片问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-小结">4. 小结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1-前言">1. 前言</h2>
+<p>上一篇简单记录了Hugo搭建个人博客，最后总结了发布一篇文章至少需要这几个步骤：</p>
+<ol>
+<li>本地生成博客文件(xxx.md)，编辑</li>
+<li>本地运行看看效果，记得将draft改为true</li>
+<li>执行hugo命令进行编译</li>
+<li>进入public目录，执行git命令上传:
+<ol>
+<li><code>git add .</code></li>
+<li><code>git commit -m &quot;xxxx&quot;</code></li>
+<li><code>git push</code></li>
+</ol>
+</li>
+<li>查看网站
+其中，步骤比较麻烦的就是第4步了，每一次修改或新增文章后，都需要重新部署，上传git，实在是繁琐！</li>
+</ol>
+<h2 id="2-解决思路">2. 解决思路</h2>
+<p>针对上述流程的第1,2步是必不可少的，第2步其实可以省略，修改draft也可以放在第1步，也就是说我们要解决的其实是如何自动编译，并且自动上传git进行部署。</p>
+<p>我的思路是这样的：创建两个Github仓库，分别存储笔记的源文件以及博客站点的编译产物public目录，使用Github Action工作流，在完成文章要发布时，将文章更新到源文件仓库，然后Github的工作流会自动帮我们构建编译生成Hugo的public目录，并且自动推送到public目录所在的仓库，如此一来，就可以省了编译部署这一繁琐流程了。</p>
+<h3 id="21-如何自动编译">2.1 如何自动编译？</h3>
+<p>要自动编译，我们可以使用Github Actions在仓库有更新时自动进行编译，这个是最简单实现的</p>
+<blockquote>
+<p>github action可以了解这里<a href="https://docs.github.com/zh/actions/learn-github-actions/understanding-github-actions" target="_blank" rel="noopener noreffer">了解 GitHub Actions - GitHub 文档</a>
+</p>
+</blockquote>
+<p>操作流程如下：</p>
+<ol>
+<li>创建两个仓库，一个为私有的，比如MyNote，用来存放笔记源文件，同时也可以作为一个备份，另一个为公开的，仓库名必须为<strong>username.github.io</strong> ,这里的username指的是你github账号名</li>
+<li>在MyNote仓库里根目录新建<code>.github/workflows</code>目录，然后在里面创建一个<code>main.yaml</code></li>
+<li>编辑<code>main.yaml</code>文件，设置Github Action配置，我的是这样的：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.124.1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="c"># 这里最好与本机hugo版本一致，例如：hugo-version: &#34;0.124.1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="c"># 有时github部署会自动更新hugo版本导致部署失败</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="c"># extended来控制是否为扩展版本</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">personal_token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PERSONAL_TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">external_repository</span><span class="p">:</span><span class="w"> </span><span class="l">LucasZhanye/LucasZhanye.github.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">publish_branch</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.head_commit.message }}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="err">这里你需要关心的有两个：</span><span class="o">`</span><span class="n">personal_token</span><span class="o">`</span><span class="err">和</span><span class="o">`</span><span class="n">external_repository</span><span class="o">`</span><span class="p">,</span><span class="err">其他的基本上照搬即可。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="o">`</span><span class="n">external_repository</span><span class="o">`</span><span class="err">指的是你要部署的仓库，这里肯定是我们另一个存放</span><span class="n">hugo的public目录的仓库了</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="err">当然这里</span><span class="n">hugo的版本尽量与你本机的一样</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">4</span><span class="p">.</span><span class="w"> </span><span class="o">`</span><span class="n">publish_branch</span><span class="o">`</span><span class="p">,</span><span class="err">如果你的是</span><span class="n">main分支</span><span class="err">，那就改为</span><span class="n">main</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>这里有一个<code>personal_token</code>，需要在自己的仓库里创建一番，具体如下操作：
+<ol>
+<li>在个人github账户下，点击<code>Settings</code> -&gt; <code>Developer Settings</code> -&gt; <code>Personal access tokens</code> -&gt; <code>Tokens(classic)</code>,然后点击<code>Generate new token</code>
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302236125-20240430-AsjX2EsQgP.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+<li>给Token起个名字，选择有效期为<code>No Expiration</code>，<strong>勾选repo以及workflow`,并且repo是要全选</strong>
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302239763-20240430-7Z93slRl4L.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">title: 注意
+</span></span><span class="line"><span class="cl">注意创建成功后，这个Token先保存起来，只会出现一次的
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>创建完Token后，回到博客源仓库，给他设置token，点击仓库的<code>Settings</code>-&gt;<code>Secrets and variables</code> -&gt; <code>Actions</code>,在<code>Secrets</code>栏中点击<code>New repository secret</code>,填入Secret Name和Secret</li>
+</ol>
+<blockquote>
+<ol>
+<li>这里填入的SecretName随便指定，但是这里设置了什么，上面的main.yaml的<code>personal_token</code>的值就是对应的名字。</li>
+<li>将第四步创建的Token填入这里的Secret栏处</li>
+</ol>
+</blockquote>
+<h3 id="22-实操步骤">2.2 实操步骤</h3>
+<p>完成上述配置后，将源文件仓库代码push到Github上，就会自动执行我们设置好的workflow，然后构建好Hugo站点，这时打开网页访问:xxxx.github.io就可以看到我们的博客站点了。</p>
+<h2 id="3-寻找合适的编辑器">3. 寻找合适的编辑器</h2>
+<p>到了这里，Hugo的博客站点已然完成，其实已经可以结束了，但是既然涉及到写作，那选择一款好用的Markdown编辑器肯定会用着很舒服，基于此原因，又去调研了一下当前比较火的笔记软件，最终发现了Obsidian这一款宝藏软件，感觉与他相见恨晚&hellip;</p>
+<p>之所以选择了Obsidian，很大一个原因是因为他支持本地存储，结合之前搭建Hugo中创建的源文件仓库，就很适合将笔记或博客备份到Github了。</p>
+<p>另一个原因是因为他的插件很丰富，真的可以做到很实用并且颜值高~,当然还有其他的许多好玩的，以后慢慢摸索。</p>
+<p>既然选择好了编辑器Obsidian，那接下来就是让Hugo与Obsidian搭配起来，让整套流程更加丝滑，做到“all in Obsidian”，也就是我们只需要在Obsidian中编写笔记或博客即可，其他所有事情都不用再操心。</p>
+<p>不了解Obsidian的，可以先下载了解使用一番，以下是我个人的一些操作配置。</p>
+<h3 id="31-obsidian创建博客文章">3.1 Obsidian创建博客文章</h3>
+<p>Obsidian的插件是非常的丰富的，而且Obsidian是以一个文件夹作为一个仓库的，这一点很完美的适合Hugo的站点，我们可以选择将Hugo的站点目录作为Obsidian的一个仓库，只需要在打开Obsidian之后，选择好这个目录打开就可以（在站点目录下会生成一个.obsidian的目录）</p>
+<p>回忆一下，在使用Hugo时，创建文章，我们需要使用命令：<code>hugo new posts/xxx.md</code>，就会帮我们在content目录下的posts文件夹创建一个md文件，并且自动生成了一些文档属性。</p>
+<p>这一个步骤是需要使用终端控制台去敲命令的，而到了Obsidian这里，大可不必，插件用用用&hellip;</p>
+<p>为了实现这一个优化，推荐两个插件:<code>QuickAdd</code>和<code>Templater</code>，还有<code>Commander</code>
+<code>QuickAdd</code>:是一个可以添加快速命令的插件
+<code>Templater</code>：是一个创建模板的插件
+<code>Commander</code>: 是一个可以让我们在侧边栏等地方创建自定义的命令按钮</p>
+<p>利用这三个，我们可以将创建文章这一个集成到Obsidian里实现，具体如下操作：</p>
+<ol>
+<li>首先在站点目录下，创建一个<code>custom</code>目录，再在里面创建两个目录：<code>scripts</code>和<code>templates</code></li>
+<li>在<code>templates</code>目录下创建一个模板文件,比如<code>新建博客模板.md</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#34;{{VALUE:articleTitle}}&#34;
+</span></span><span class="line"><span class="cl">subtitle: &#34;&#34;
+</span></span><span class="line"><span class="cl">date: {{VALUE:articleTimestamp}}
+</span></span><span class="line"><span class="cl">categories: [{{VALUE:articleCategory}}]
+</span></span><span class="line"><span class="cl">tags: [{{VALUE:articleTag}}]
+</span></span><span class="line"><span class="cl">toc: 
+</span></span><span class="line"><span class="cl">    enable: true
+</span></span><span class="line"><span class="cl">    auto: true
+</span></span><span class="line"><span class="cl">draft: true
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这个模板文件定义的是生成的文章的文档属性，里面包含了一些必要的，也可以自行添加。</p>
+</blockquote>
+<ol start="3">
+<li>在<code>scripts</code>下创建脚本文件，比如<code>新建博客脚本.js</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">QuickAdd</span> <span class="o">=</span> <span class="nx">params</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">title</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">quickAddApi</span><span class="p">.</span><span class="nx">inputPrompt</span><span class="p">(</span><span class="s2">&#34;文章标题 - Title&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">tags</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">quickAddApi</span><span class="p">.</span><span class="nx">inputPrompt</span><span class="p">(</span><span class="s2">&#34;文章标签 - Tags&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">categorys</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">quickAddApi</span><span class="p">.</span><span class="nx">inputPrompt</span><span class="p">(</span><span class="s2">&#34;文章类别 - Categories&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">titleName</span> <span class="o">=</span> <span class="nx">title</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">);</span> <span class="c1">// 将路径字符串拆分成数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">titleName</span><span class="p">[</span><span class="nx">titleName</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// 获取数组的最后一个元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">variables</span><span class="p">[</span><span class="s2">&#34;articleTitle&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">variables</span><span class="p">[</span><span class="s2">&#34;articleFilename&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">title</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">variables</span><span class="p">[</span><span class="s2">&#34;articleCategory&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">categorys</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">variables</span><span class="p">[</span><span class="s2">&#34;articleTag&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">tags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">variables</span><span class="p">[</span><span class="s2">&#34;articleTimestamp&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">QuickAdd</span><span class="p">.</span><span class="nx">quickAddApi</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">now</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-DDTHH:mm:ssZ&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这个脚本实质上是用来给模板文件的参数设置值的，这里的title，tag等通过输入提示框来获取，获取到的值会替换掉模板文件中的参数</p>
+</blockquote>
+<ol start="4">
+<li>接下来，在Obsidian中，找到<code>QuickAdd</code>设置页面，点击<code>Manage Macros</code>,输入一个名字，比如&quot;新建文章&quot;,然后点击<code>add macros</code>
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302335485-20240430-D4EXCmiWMu.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302337434-20240430-zUhOR6894X.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+<li>点击<code>Configure</code>,选择脚本，然后点击添加
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302339024-20240430-CY33Pm0wUe.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+<li>之后再点击<code>Template</code>，然后点击配置(小齿轮)
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302340417-20240430-CFeo3eK6FW.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302341068-20240430-LrBKgnRfAk.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+<li>配置如下：这里需要注意的是选择好保存的文件夹后要记得点击Add，否则是不会生效的。这里配置了文件名跟文章Title一样
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302343423-20240430-bp7DPoKkQW.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+<li>然后回到最初的配置页面，新建一个Marco，注意要选择<strong>Macro</strong>
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302345885-20240430-S1TRpjTOuO.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+之后就点亮这个小闪电!
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302346742-20240430-waajhXJta6.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+<li>到这里已经创建好了，可以使用<code>ctrl+p</code>调出命令窗口，输入<code>QuickAdd</code>关键字，就可以看到我们新创建的命令了
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302347877-20240430-hL5VbCdzNR.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+点击这个命令，就会出现对话框，让我们输入文件Title等信息，一路输入即可，最终就会创建出来一个文章</li>
+<li>最后，我们再利用<code>Commander</code>插件，在侧边栏给我们新增一个命令按钮，同样的操作，打开<code>Commander</code>配置页面，选择要将按钮放在哪个位置，然后添加命令即可。
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302350541-20240430-Z6uWh5v38F.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+比如我的是选择在左侧边栏，那么就会在左侧边栏多一个按钮，点击就是创建文章的流程了，还是十分舒服的
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202404302351776-20240430-DkA70BHWPv.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></li>
+</ol>
+<h3 id="32-obsidian-git操作">3.2 Obsidian Git操作</h3>
+<p>上一步已经实现了在Obsidian中去创建博客文章了，这样一来不需要再使用终端去新增，对于“all in Obsidian”更进一步了，仔细想想，目前好像就差一个git push博客文章到源文件仓库这一个操作脱离在Obsidian之外了，那么接下来就来解决掉这个问题。</p>
+<p>Obsidian插件是非常的丰富的，其中就有一款是跟Git有关的，叫<code>Obsidian Git</code>,后来又改名为<code>Git</code>，直接在第三方插件库搜索<code>Git</code>即可找到。</p>
+<p>因为我们这个仓库本身就是源文件仓库，是存放在Github上的，因此这个目录下有<code>.git</code>目录，Git插件就会识别到，我们只需要配置好Git插件就可以实现自动备份，上传文件了，比如设置每30分钟自动提交push，设置commit message格式等。</p>
+<p>同样也可以使用上面提到的插件搞个命令按钮，手动提交，方便我们想要实时发布的情况。</p>
+<h3 id="33-处理图片问题">3.3 处理图片问题</h3>
+<p>通过上面两步，我们已经可以做到了只需要打开Obsidian进行写作即可，其他一概都不用关心，要发布的文章，只需要编辑完成后将文档属性的<code>draft</code>改为true，然后Git会自动备份上传，上传完成后又会自动构建发布。</p>
+<p>实现了“all in obsidian”后，我们还有一个问题可以优化处理，那就是图片资源的存放问题，一般有两种处理方法：</p>
+<ol>
+<li>与文章放一起，比如创建一个img目录专门存放文章用到的图片，通过相对路径引用，在上传Github时随文章一起上传</li>
+<li>使用图床存储，然后通过外链进行引用</li>
+</ol>
+<p>其实两种方案都可以，各有各的好处，但是我个人倾向推荐方案2</p>
+<p>先说方案1，这里可以使用一个Obsidian的插件：<code>Custom Attachment location</code> 这个插件可以让我们类似Typora一样指定一个目录作为附件存放路径，当我们复制图片进文章时会自动在文章所在路径下指定的目录中保存这个图片，具体路径要自己配置下就可以。</p>
+<p>方案2，推荐使用一款工具，叫做<a href="https://github.com/Kuingsmile/PicList/blob/dev/README_cn.md" target="_blank" rel="noopener noreffer">PicList</a>
+，需要先下载到本地</p>
+<p>PicList是一款高效的云存储和图床平台管理工具，在PicGo的基础上经过深度的二次开发，不仅完整保留了PicGo的所有功能，还增添了许多新的feature。</p>
+<p>然后Obsidian中有一个插件<code>Image auto upload Plugin</code>支持这个<code>PicList</code>，通过配置后，可以实现在文章中复制图片时能够自动上传到我们的图床，用起来十分丝滑。</p>
+<blockquote>
+<p>PS: 这里我使用了Github作为图床，穷鬼没法子~</p>
+</blockquote>
+<p>具体的配置很简单的，可以看看PicList的说明就能上手了，同时打开PicList软件页面也可以对自己的图床进行管理，可以删除图片，增加水印，压缩等等操作</p>
+<p>至此，一切就准备就绪了，可以开干了&hellip;</p>
+<h2 id="4-小结">4. 小结</h2>
+<p>这一篇主要是针对Hugo发布博客这一繁琐流程做一个优化，既然选择了Obsidian作为笔记软件，那么日常的文章，笔记自然而然是使用Obsidian来编写记录了，经过摸索，发现了Obsidian的一些插件很适配Hugo发布博客的流程优化，因此将hugo与Obsidian搭配起来一起使用，做到“all in obsidian”，就是只需要使用Obsidian写笔记文章即可，不需要额外再做一系列操作。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-04-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" data-title="Hugo与Obsidian搭配食用" data-hashtags="hugo,obsidian"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" data-hashtag="hugo"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" data-title="Hugo与Obsidian搭配食用"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" data-title="Hugo与Obsidian搭配食用"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/hugo/">Hugo</a>,&nbsp;<a href="/tags/obsidian/">Obsidian</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="next" rel="next" title="Hugo搭建个人博客">Hugo搭建个人博客<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">LucasZhang</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.d60b69726b8e03fff4c5c6b3cad9ccf49a813379940d6830a96d4ff54fb6fc5f.css" integrity="sha256-1gtpcmuOA//0xcazytnM9JqBM3mUDWgwqW1P9U&#43;2/F8="><link rel="stylesheet" href="/lib/katex/katex.min.4d3844b51f976a58562a47c5dfcdd82ceac8e7434635e22aaf34beab4f1a7eb6.css" integrity="sha256-TThEtR&#43;XalhWKkfF383YLOrI50NGNeIqrzS&#43;q08afrY="><link rel="stylesheet" href="/lib/katex/copy-tex.min.5a4db453d992fe41c67128248d28917b35b97b1a93eb000e2b0c9239a2e8b573.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM="><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.ae2da1bd62c6469ee27770ad1cddf2e8296d8a7f6d85b091463e5200c5e320af.js" integrity="sha256-ri2hvWLGRp7id3CtHN3y6Cltin9thbCRRj5SAMXjIK8="></script><script type="text/javascript" src="/lib/lunr/lunr.min.08a93c0120364b01159db3c287f39b2180bb740334472bda0675bd3f18981676.js" integrity="sha256-CKk8ASA2SwEVnbPCh/ObIYC7dAM0RyvaBnW9PxiYFnY="></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.8127f0ca4cabc7246f3620f3ef3bf9b1db02805dfe03d6d4c57bc74bc0bf6eea.js" integrity="sha256-gSfwykyrxyRvNiDz7zv5sdsCgF3&#43;A9bUxXvHS8C/buo="></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.825fab54c26891370cbd3df4cdff5c9de31af8bb84474e6774573463d8708ae7.js" integrity="sha256-gl&#43;rVMJokTcMvT30zf9cneMa&#43;LuER05ndFc0Y9hwiuc="></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.6e61be2f374a0122510025578940baf7ef8dbbcaf3ecc5f5535cfc81bd1cfd39.js" integrity="sha256-bmG&#43;LzdKASJRACVXiUC69&#43;&#43;Nu8rz7MX1U1z8gb0c/Tk="></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.ac9ce102394282124a4a4c78980bf7570560c434806cd334007ecf84fe1c0e7b.js" integrity="sha256-rJzhAjlCghJKSkx4mAv3VwVgxDSAbNM0AH7PhP4cDns="></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.585cc139c484b8de6d2e75af9d852f6b83f73a53742029e02f25eaf8b34d0c16.js" integrity="sha256-WFzBOcSEuN5tLnWvnYUva4P3OlN0ICngLyXq&#43;LNNDBY="></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.196d42fafedd774e5000cc21bf24dc1b5162c6c625651f68bc7259a5203c7461.js" integrity="sha256-GW1C&#43;v7dd05QAMwhvyTcG1FixsYlZR9ovHJZpSA8dGE="></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9.js" integrity="sha256-4XodgW4TwIJuDtf&#43;v6vDJ39FVxI0veC/kSCCmnFp7ck="></script><script type="text/javascript" src="/lib/sharer/sharer.min.cc31d902aa4f3fcc8bb8c81aa534a4e2103e9b11f65b9fbd5b7156e089889ceb.js" integrity="sha256-zDHZAqpPP8yLuMgapTSk4hA&#43;mxH2W5&#43;9W3FW4ImInOs="></script><script type="text/javascript" src="/lib/katex/katex.min.41d312281727d87cb0ce1fe496e07f5fe080f881a50594d4e6efe22c013eb2c6.js" integrity="sha256-QdMSKBcn2Hywzh/kluB/X&#43;CA&#43;IGlBZTU5u/iLAE&#43;ssY="></script><script type="text/javascript" src="/lib/katex/auto-render.min.cb7f4ca60ed5dc3e258415f8c7a3b46d4a93578a52adf83011f18a7f190e7602.js" integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="></script><script type="text/javascript" src="/lib/katex/copy-tex.min.7ad4aa6d2545e3e2f07bc30693f55a9dcd6c47e996bfea8e1bbddfc56c3da7de.js" integrity="sha256-etSqbSVF4&#43;Lwe8MGk/Vanc1sR&#43;mWv&#43;qOG73fxWw9p94="></script><script type="text/javascript" src="/lib/katex/mhchem.min.c1e9e98fb7fdfffc4f4bbd56f2c0235949f39831949bd35f525a4e61538cb207.js" integrity="sha256-wenpj7f9//xPS71W8sAjWUnzmDGUm9NfUlpOYVOMsgc="></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.c79d8f77ec4764afef516c3d319d7b61196ed17cd5d2835c612c65179724f5e0.js" integrity="sha256-x52Pd&#43;xHZK/vUWw9MZ17YRlu0XzV0oNcYSxlF5ck9eA="></script></body>
+</html>

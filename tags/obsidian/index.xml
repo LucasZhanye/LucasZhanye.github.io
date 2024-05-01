@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Obsidian - 标签 - LucasZhang个人博客</title>
+        <link>https://LucasZhanye.github.io/tags/obsidian/</link>
+        <description>Obsidian - 标签 - LucasZhang个人博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 25 Apr 2024 18:53:46 &#43;0800</lastBuildDate><atom:link href="https://LucasZhanye.github.io/tags/obsidian/" rel="self" type="application/rss+xml" /><item>
+    <title>Hugo与Obsidian搭配食用</title>
+    <link>https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/</link>
+    <pubDate>Thu, 25 Apr 2024 18:53:46 &#43;0800</pubDate>
+    <author>LucasZhang</author>
+    <guid>https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/</guid>
+    <description><![CDATA[1. 前言 上一篇简单记录了Hugo搭建个人博客，最后总结了发布一篇文章至少需要这几个步骤： 本地生成博客文件(xxx.md)，编辑 本地运行看看效果]]></description>
+</item>
+</channel>
+</rss>
