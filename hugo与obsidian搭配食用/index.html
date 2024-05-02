@@ -23,7 +23,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/LucasZhanye.github.io\/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8\/"
-        },"genre": "posts","keywords": "hugo, obsidian","wordcount":  4668 ,
+        },"genre": "posts","keywords": "hugo, obsidian","wordcount":  4816 ,
         "url": "https:\/\/LucasZhanye.github.io\/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8\/","datePublished": "2024-04-25T18:53:46+08:00","dateModified": "2024-04-25T18:53:46+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -113,7 +113,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Hugo与Obsidian搭配食用</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>LucasZhang</a>
 </span>&nbsp;<span class="post-category">收录于 <a href="/categories/hugo/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Hugo</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-25">2024-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4668 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-25">2024-04-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4816 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -134,6 +134,7 @@
         <li><a href="#31-obsidian创建博客文章">3.1 Obsidian创建博客文章</a></li>
         <li><a href="#32-obsidian-git操作">3.2 Obsidian Git操作</a></li>
         <li><a href="#33-处理图片问题">3.3 处理图片问题</a></li>
+        <li><a href="#34-处理链接问题">3.4 处理链接问题</a></li>
       </ul>
     </li>
     <li><a href="#4-小结">4. 小结</a></li>
@@ -161,7 +162,8 @@
 <h3 id="21-如何自动编译">2.1 如何自动编译？</h3>
 <p>要自动编译，我们可以使用Github Actions在仓库有更新时自动进行编译，这个是最简单实现的</p>
 <blockquote>
-<p>github action可以了解这里<a href="https://docs.github.com/zh/actions/learn-github-actions/understanding-github-actions" target="_blank" rel="noopener noreffer">了解 GitHub Actions - GitHub 文档</a>
+<p>github action可以了解这里
+<a href="https://docs.github.com/zh/actions/learn-github-actions/understanding-github-actions" target="_blank">了解 GitHub Actions - GitHub 文档</a>
 </p>
 </blockquote>
 <p>操作流程如下：</p>
@@ -554,7 +556,8 @@
 </ol>
 <p>其实两种方案都可以，各有各的好处，但是我个人倾向推荐方案2</p>
 <p>先说方案1，这里可以使用一个Obsidian的插件：<code>Custom Attachment location</code> 这个插件可以让我们类似Typora一样指定一个目录作为附件存放路径，当我们复制图片进文章时会自动在文章所在路径下指定的目录中保存这个图片，具体路径要自己配置下就可以。</p>
-<p>方案2，推荐使用一款工具，叫做<a href="https://github.com/Kuingsmile/PicList/blob/dev/README_cn.md" target="_blank" rel="noopener noreffer">PicList</a>
+<p>方案2，推荐使用一款工具，叫做
+<a href="https://github.com/Kuingsmile/PicList/blob/dev/README_cn.md" target="_blank">PicList</a>
 ，需要先下载到本地</p>
 <p>PicList是一款高效的云存储和图床平台管理工具，在PicGo的基础上经过深度的二次开发，不仅完整保留了PicGo的所有功能，还增添了许多新的feature。</p>
 <p>然后Obsidian中有一个插件<code>Image auto upload Plugin</code>支持这个<code>PicList</code>，通过配置后，可以实现在文章中复制图片时能够自动上传到我们的图床，用起来十分丝滑。</p>
@@ -562,6 +565,11 @@
 <p>PS: 这里我使用了Github作为图床，穷鬼没法子~</p>
 </blockquote>
 <p>具体的配置很简单的，可以看看PicList的说明就能上手了，同时打开PicList软件页面也可以对自己的图床进行管理，可以删除图片，增加水印，压缩等等操作</p>
+<h3 id="34-处理链接问题">3.4 处理链接问题</h3>
+<p>当我写完第二篇，在第一篇上将第二篇文章的链接给加上后，在hugo渲染后，页面点击是一个不存在的页面，然后我看了下生成的url路径好像有点不对，然后一搜索发现有牛人已经给了方案去处理hugo渲染链接的问题了，使用了Hugo提供的render hook机制。
+参考这篇：
+<a href="https://juejin.cn/post/7353456468094369829" target="_blank">用 hugo render hooks 简化 markdown 中链接、图片的引用</a>
+</p>
 <p>至此，一切就准备就绪了，可以开干了&hellip;</p>
 <h2 id="4-小结">4. 小结</h2>
 <p>这一篇主要是针对Hugo发布博客这一繁琐流程做一个优化，既然选择了Obsidian作为笔记软件，那么日常的文章，笔记自然而然是使用Obsidian来编写记录了，经过摸索，发现了Obsidian的一些插件很适配Hugo发布博客的流程优化，因此将hugo与Obsidian搭配起来一起使用，做到“all in obsidian”，就是只需要使用Obsidian写笔记文章即可，不需要额外再做一系列操作。</p>
