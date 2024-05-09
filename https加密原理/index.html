@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>网络/计算机网络 - LucasZhang个人博客</title><meta name="Description" content=""><meta property="og:title" content="网络/计算机网络" />
+<meta property="og:description" content="前言 最近在学习网络相关知识，看了《图解HTTP》这本书，里面提到了HTTPS加密的相关知识，尤其是对称秘钥加密，非对称密钥加密，数字证书，数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" /><meta property="og:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-22T23:04:37+08:00" />
+<meta property="article:modified_time" content="2024-04-22T23:04:37+08:00" /><meta property="og:site_name" content="LucasZhang个人博客" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta name="twitter:title" content="网络/计算机网络"/>
+<meta name="twitter:description" content="前言 最近在学习网络相关知识，看了《图解HTTP》这本书，里面提到了HTTPS加密的相关知识，尤其是对称秘钥加密，非对称密钥加密，数字证书，数"/>
+<meta name="application-name" content="LucasZhang个人博客">
+<meta name="apple-mobile-web-app-title" content="LucasZhang个人博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/logo.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" /><link rel="next" href="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css" integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH&#43;KuXHiZWODptY5K8NF4="><link rel="stylesheet" href="/css/style.min.897bb8797133984bdbd3ac834db1a0341c66a8efd95db2216603704f28b76d77.css" integrity="sha256-iXu4eXEzmEvb06yDTbGgNBxmqO/ZXbIhZgNwTyi3bXc="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.0df5a33710e433de1f5415b1d47e4130ca7466aee5b81955f1045c4844bbb3ed.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s&#43;0="><link rel="stylesheet" href="/lib/animate/animate.min.5fbaeb9f8e25d7e0143bae61d4b1802c16ce7390b96ceb2d498b0d96ff4c853f.css" integrity="sha256-X7rrn44l1&#43;AUO65h1LGALBbOc5C5bOstSYsNlv9MhT8="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "网络/计算机网络",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/LucasZhanye.github.io\/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86\/"
+        },"genre": "posts","keywords": "network","wordcount":  3871 ,
+        "url": "https:\/\/LucasZhanye.github.io\/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86\/","datePublished": "2024-04-22T23:04:37+08:00","dateModified": "2024-04-22T23:04:37+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "LucasZhang"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="normal" data-header-mobile="normal"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="LucasZhang个人博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/logo.png"
+        data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/logo.png"
+        title="/images/logo.png" />LucasZhang个人博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa-solid fa-house'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fa-brands fa-markdown'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fa-solid fa-tags'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fa-solid fa-list'></i> 分类 </a><a class="menu-item" href="https://github.com/LucasZhanye" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="LucasZhang个人博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/logo.png"
+        data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/logo.png"
+        title="/images/logo.png" />LucasZhang个人博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa-solid fa-house'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fa-brands fa-markdown'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fa-solid fa-tags'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fa-solid fa-list'></i>分类</a><a class="menu-item" href="https://github.com/LucasZhanye" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">网络/计算机网络</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>LucasZhang</a>
+</span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>网络</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-22">2024-04-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3871 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#为什么需要https">为什么需要HTTPS</a></li>
+    <li><a href="#对称加密">对称加密</a></li>
+    <li><a href="#非对称加密">非对称加密</a></li>
+    <li><a href="#数字证书">数字证书</a></li>
+    <li><a href="#https加密原理">HTTPS加密原理</a></li>
+    <li><a href="#学习资料">学习资料</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="前言">前言</h2>
+<p>最近在学习网络相关知识，看了《图解HTTP》这本书，里面提到了HTTPS加密的相关知识，尤其是对称秘钥加密，非对称密钥加密，数字证书，数字签名等基础知识，感觉有点混乱，于是我需要整理一下这些内容。</p>
+<h2 id="为什么需要https">为什么需要HTTPS</h2>
+<p>首先，我们得知道为什么需要HTTPS？原因就是HTTP不安全</p>
+<p>那HTTP不安全体现在哪里？</p>
+<ol>
+<li>HTTP存在以下缺点：</li>
+</ol>
+<ul>
+<li>通信使用明文，无法保证保密性，内容可能会被<strong>窃听</strong></li>
+<li>不验证通信方的身份，无法保证可靠性，有可能遭遇<strong>伪装</strong></li>
+<li>无法证明报文的完整性，有可能遭遇<strong>篡改</strong>，
+总结一下：就是HTTP的不安全性，可能会导致<strong>被窃听</strong>，<strong>被伪装</strong>，<strong>被篡改</strong></li>
+</ul>
+<ol start="2">
+<li>什么是HTTPS？
+HTTPS就是身披SSL外壳的HTTP。
+HTTPS并非是应用层的一种新协议，只是HTTP通信接口部分用SSL或TLS协议代替而已。
+通常情况，HTTP直接和TCP通信，当使用SSL时，则演变为先和SSL通信，再由SSL和TCP通信。</li>
+<li>HTTPS怎么保证安全？
+HTTPS=HTTP+SSL/TLS,其实就是采用了加密来保证安全，具体如何加密，先说结论：结合对称加密和非对称加密的优点以及数字证书，数字签名的方式来保证通信的安全（也就是SSL/TLS协议的实现)。</li>
+</ol>
+<p>接下来就来了解这些基础知识点。</p>
+<h2 id="对称加密">对称加密</h2>
+<ol>
+<li>
+<p>什么是对称加密？
+简单的说，对称加密就是指加密和解密使用同一个密钥，这种方式就叫做对称加密。</p>
+<p>对称加密的优点是：算法公开，计算量小，加密速度快，效率高
+缺点是：没有密钥就无法解密，因此双方必须保存好密钥</p>
+<p>因此只要保证了密钥的安全，那么整个通信过程就可以说是具有保密性的。
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png" title="对称加密" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png" data-sub-html="<h2> </h2><p>对称加密</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071725037-20240507-NVZuypM5kc.png" />
+    </a><figcaption class="image-caption">对称加密</figcaption>
+    </figure></p>
+</li>
+<li>
+<p>使用对称加密来作为HTTPS的加密可行吗？
+从对称加密的特点来看，通信双方必须得拥有同样的密钥才行，那问题就来了，双方如何协商使用同一把密钥？</p>
+<p>在互联网的场景下，服务端事先无法知道客户端是谁，也做不到跟每一个客户端提前协商好使用的密钥，因此这个密钥协商，是需要通过通信双方以报文的形式沟通确认的。</p>
+<p>如果通过报文的方式传输密钥，就会存在一种问题，报文可能会被<strong>窃听</strong>,也就是可能会有第三方在通信的过程窃听密钥，然后使用密钥去解密报文，这样一来，整个通信过程其实和裸奔无异，因此只使用对称加密无法保证通信的保密性。</p>
+<p>
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081932395-20240508-uUtR7YifLL.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></p>
+</li>
+</ol>
+<h2 id="非对称加密">非对称加密</h2>
+<ol>
+<li>
+<p>什么是非对称加密？
+非对称加密简单的来理解，就是有两把密钥，一把叫公钥，一把叫私钥。
+公钥可以公开，任何人都可以获得，私钥不能让其他人知道，并且<strong>使用公钥加密的密文，只有私钥可以解密；使用私钥加密的密文，只有公钥可以解密</strong></p>
+<blockquote>
+<p>实质上，使用私钥加密，公钥解密不应该叫做解密，应该算是验签，这种场景一般用来验证身份，因为公钥和私钥对应，私钥只有持有人才有，既然公钥能解，那说明私钥是正确的，那这个身份必然是持有人。</p>
+</blockquote>
+<p>非对称加密的优点：安全，即使数据被拦截，公钥被获取，没有私钥也就无法破解。
+缺点：加密算法比较复杂，加解密效率较低。
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png" title="非对称加密" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png" data-sub-html="<h2> </h2><p>非对称加密</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405071744404-20240507-x1EeisJSaH.png" />
+    </a><figcaption class="image-caption">非对称加密</figcaption>
+    </figure></p>
+</li>
+<li>
+<p>使用非对称加密来作为HTTPS的加密可行吗？
+根据非对称加密的机制，我们可能会想到这样：客户端在向服务器请求时，服务器先将公钥传输给客户端，然后客户端使用服务器公钥进行加密，服务端拿到加密数据后使用私钥进行解密，由于私钥只有服务器所有，所以由客户端到服务器这一条通道似乎是可以保证安全性的，但是这里又如何保证公钥安全的传输给客户端，如果第三方在服务器传输公钥给客户端时进行拦截，然后使用自己的公钥（他也可以有自己的公钥和私钥）传输给客户端，然后客户端就会拿到这个假的公钥进行加密，他拿到后使用自己的私钥进行解密，然后可以篡改等操作，再使用服务器的公钥来加密发送给服务器，这样一来，服务器也无法感知，就会拿到假的数据了。</p>
+<p>反过来，服务器向客户端发送数据这一过程也无法得到保障，如果服务器使用私钥加密，然后传输给客户端，那就还是有可能出现第三方窃听，拿到这个加密数据，因为公钥是公开的，任何人都可以获取(包括第三方)，然后使用服务器公钥就可以进行解密了，因此这一条传输通道是不可靠的。</p>
+<p>
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405081944134-20240508-zCR0NDiCP2.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+综上所述，根本原因就是无法确认这个公钥的真实性。总不能给公钥也加密吧，这样一来不就是俄罗斯套娃，无穷无尽了。</p>
+<p>所以，为了解决这个公钥真实性问题，实在没法子了，这就需要引入一个公认的可信任的第三方，这个就是CA机构(Certificate Authority)，他就像是网络世界里的政府，公安局等，具有极高的可信度，在这里他就是公理，由他所颁发的证书我们就认为是安全可信任的。</p>
+</li>
+</ol>
+<h2 id="数字证书">数字证书</h2>
+<p>数字证书是由CA机构颁发的，用于证明实体身份的合法性，<strong>它包含了实体的公钥和其他相关信息，并由CA进行签名</strong>。</p>
+<p>证书由服务器传输给浏览器，浏览器从证书里拿到公钥，然后再进行加密传输，证书就如同身份证，他证明了公钥的真实性，表明公钥的确是来自这个服务器的。</p>
+<p>同样这里对于证书的传输，也是会存在传输过程中如何防止被篡改或掉包等问题，但它肯定是解决了这些问题的（否则怎么会最终使用这种方案），接下来慢慢了解</p>
+<ol>
+<li>
+<p>数字证书生成流程</p>
+<ol>
+<li>首先，证书申请者自己生成一对密钥（非对称加密），然后拿着自己的公钥以及其他信息，比如拥有者身份信息等，向CA申请</li>
+<li>CA机构在拿到这些信息后，会选择一种<strong>单向</strong>的哈希算法（比如MD5）对这些信息进行加密，加密后的东西称为<strong>摘要</strong>
+<blockquote>
+<p>使用单向哈希算法就是因为它的特点为单向不可逆，只要有一点变化，相同的算法加密后的数据都是完全不同的，这样就可以防止信息被篡改</p>
+</blockquote>
+</li>
+<li>CA生成摘要后，还需要使用自己的私钥对这个摘要进行加密(没错，CA自己的私钥，它的公钥也是公开的)，加密后的数据就是<strong>数字签名</strong>了。</li>
+<li>最后，CA会将申请者的摘要和数字签名整合一起，生成数字证书，从而将数字证书颁发给申请者</li>
+</ol>
+</li>
+<li>
+<p>数字证书验证过程</p>
+<ol>
+<li>浏览器拿到证书后，首先使用CA机构的公钥对数字签名进行验签，如果能正确解密，则证明这个证书确实是来自于CA机构的</li>
+<li>接着，使用证书里指明的哈希算法，对证书里的公钥进行加密运算，得到摘要</li>
+<li>对比证书的摘要与步骤2的摘要，是否一致，从而证明公钥有无被篡改</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">注意:这里的CA机构的公钥必须安全地转交给客户端，使用通信方式时，如何安全转交是一件很困难的事，因此，多数浏览器开发商发布版本时，会事先在内部植入常用认证机关的公开密钥
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>整个流程如下图（来自《图解HTTP》）：
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405082017527-20240508-7PkgfJwGGe.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+基于以上的措施，还有可能存在中间人能够篡改或掉包数字证书吗？
+答案是不能了，首先掉包证书，当然中间人也可以申请自己的证书，但是证书上的其他信息，基本都会包含服务器域名等信息，浏览器是会将它与自己请求的域名作对比，这样就能知道证书有没有被掉包了；其次篡改，浏览器在解签证书后是会对证书的明文进行摘要计算的，得到的结果与证书的摘要一对比就知道有没有被篡改了。</p>
+</li>
+<li>
+<p>其他的一些说明</p>
+<ol>
+<li>
+<p>为啥要先生成摘要，再用CA私钥加密，不可以直接用CA私钥加密吗？
+首先得了解摘要算法，也就是常说的散列函数，哈希函数，比如MD5，SHA-1等（这两个安全度不高，在TLS里已经被禁止使用了，目前TLS推荐的是SHA-2），它们能够将任意长度的数据“压缩”成固定长度，而且独一无二的字符串。
+再结合非对称加密的缺点，就是计算耗时，效率不高，所以先生成摘要（因为长度固定较少），这样运算量就小很多，而且得到的数字签名也较小，方便保管和传输，客户端解密的时候速度也会快得多。</p>
+</li>
+<li>
+<p>CA的信任链
+实质上，全世界顶级CA就只有那么几家，比如DigiCert、VeriSign、Entrust、Let&rsquo;s Encrypt等，全世界所有CA证书申请都得找他们，他们根本忙不过来，因此他们作为顶级CA，往下分了二级，三级CA，低级CA可以让高级CA签名认证，但最后的顶级CA，也就是Root CA，就只能自己证明自己了，这个就叫“自签名证书”或者“根证书”，这个根证书，必须相信，否则都无法闭环，信任链就走不下去了。
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405091125053-20240509-wsgjBSrPAh.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure>
+有了这个证书体系，操作系统和浏览器都内置了各大CA的根证书，上网的时候只要服务器发过来它的证书，就可以验证证书里的签名，顺着证书链，一层层地验证，直到找到根证书，就能够确认证书是可信的，从而继续验证证书里的公钥。</p>
+</li>
+<li>
+<p>证书体系的弱点
+如果CA失误或者被欺骗，签发了错误的证书，虽然证书是真的，但是它代表的网站却是假的。</p>
+<p>还有一种更危险的情况，CA被黑客攻陷，或者CA有恶意，因为根证书是信任的源头，将会导致整个信任链都不可信了。</p>
+<p>针对第一种，开发出了CRL（证书吊销列表，Certificate revocation list）和OCSP（在线证书状态协议，Online Certificate STatus Protocol）,及时废止有问题的证书。
+对于第二种，因为涉及的证书太多，就只能操作系统或浏览器从根上“下狠手”了，撤销对CA的信任，列入“黑名单”，这样它颁发的所有证书都会被认为是不安全的了。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="https加密原理">HTTPS加密原理</h2>
+<p>有了上面的知识铺垫后，再来理解HTTPS的加密原理就比较易懂了，实质上HTTPS的核心是SSL/TLS的加密。</p>
+<p>有关SSL/TLS运行机制的可以看看大佬的这两篇文章：</p>
+<ul>
+<li>
+<a href="https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank">SSL/TLS协议运行机制的概述 - 阮一峰的网络日志</a>
+</li>
+<li>
+<a href="https://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank">图解SSL/TLS协议 - 阮一峰的网络日志</a>
+</li>
+</ul>
+<p>PS：后面有时间我再通过抓包的方式来学习下
+<a href="HTTPS%e6%8f%a1%e6%89%8b%e6%b5%81%e7%a8%8b.md">HTTPS握手流程</a>
+。</p>
+<p><strong>总结来说，HTTPS就是利用了数字证书来保证服务器的公钥安全的发送给客户端，然后再利用非对称加密来安全的传递对称加密生成的密钥，最后再通过这个密钥来进行数据交互。</strong></p>
+<blockquote>
+<p>因为对称加密效率高，在已经建立了安全可信的通信之后，对称加密的密钥就是安全的，没有第三方能够获取到，因此可以放心的使用。</p>
+</blockquote>
+<h2 id="学习资料">学习资料</h2>
+<ol>
+<li>《图解HTTP》</li>
+<li>极客时间-《透视HTTP协议》</li>
+<li>
+<a href="https://cjting.me/2021/03/02/how-to-validate-tls-certificate/" target="_blank">安全背后: 浏览器是如何校验证书的 - CJ Ting&rsquo;s Blog</a>
+</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-04-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="网络/计算机网络" data-hashtags="network"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-hashtag="network"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="网络/计算机网络"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="网络/计算机网络"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/network/">Network</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" class="next" rel="next" title="Hugo与Obsidian搭配食用">Hugo与Obsidian搭配食用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">LucasZhang</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.d60b69726b8e03fff4c5c6b3cad9ccf49a813379940d6830a96d4ff54fb6fc5f.css" integrity="sha256-1gtpcmuOA//0xcazytnM9JqBM3mUDWgwqW1P9U&#43;2/F8="><link rel="stylesheet" href="/lib/katex/katex.min.4d3844b51f976a58562a47c5dfcdd82ceac8e7434635e22aaf34beab4f1a7eb6.css" integrity="sha256-TThEtR&#43;XalhWKkfF383YLOrI50NGNeIqrzS&#43;q08afrY="><link rel="stylesheet" href="/lib/katex/copy-tex.min.5a4db453d992fe41c67128248d28917b35b97b1a93eb000e2b0c9239a2e8b573.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM="><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.ae2da1bd62c6469ee27770ad1cddf2e8296d8a7f6d85b091463e5200c5e320af.js" integrity="sha256-ri2hvWLGRp7id3CtHN3y6Cltin9thbCRRj5SAMXjIK8="></script><script type="text/javascript" src="/lib/lunr/lunr.min.08a93c0120364b01159db3c287f39b2180bb740334472bda0675bd3f18981676.js" integrity="sha256-CKk8ASA2SwEVnbPCh/ObIYC7dAM0RyvaBnW9PxiYFnY="></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.8127f0ca4cabc7246f3620f3ef3bf9b1db02805dfe03d6d4c57bc74bc0bf6eea.js" integrity="sha256-gSfwykyrxyRvNiDz7zv5sdsCgF3&#43;A9bUxXvHS8C/buo="></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.825fab54c26891370cbd3df4cdff5c9de31af8bb84474e6774573463d8708ae7.js" integrity="sha256-gl&#43;rVMJokTcMvT30zf9cneMa&#43;LuER05ndFc0Y9hwiuc="></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.6e61be2f374a0122510025578940baf7ef8dbbcaf3ecc5f5535cfc81bd1cfd39.js" integrity="sha256-bmG&#43;LzdKASJRACVXiUC69&#43;&#43;Nu8rz7MX1U1z8gb0c/Tk="></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.ac9ce102394282124a4a4c78980bf7570560c434806cd334007ecf84fe1c0e7b.js" integrity="sha256-rJzhAjlCghJKSkx4mAv3VwVgxDSAbNM0AH7PhP4cDns="></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.585cc139c484b8de6d2e75af9d852f6b83f73a53742029e02f25eaf8b34d0c16.js" integrity="sha256-WFzBOcSEuN5tLnWvnYUva4P3OlN0ICngLyXq&#43;LNNDBY="></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.196d42fafedd774e5000cc21bf24dc1b5162c6c625651f68bc7259a5203c7461.js" integrity="sha256-GW1C&#43;v7dd05QAMwhvyTcG1FixsYlZR9ovHJZpSA8dGE="></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9.js" integrity="sha256-4XodgW4TwIJuDtf&#43;v6vDJ39FVxI0veC/kSCCmnFp7ck="></script><script type="text/javascript" src="/lib/sharer/sharer.min.cc31d902aa4f3fcc8bb8c81aa534a4e2103e9b11f65b9fbd5b7156e089889ceb.js" integrity="sha256-zDHZAqpPP8yLuMgapTSk4hA&#43;mxH2W5&#43;9W3FW4ImInOs="></script><script type="text/javascript" src="/lib/katex/katex.min.41d312281727d87cb0ce1fe496e07f5fe080f881a50594d4e6efe22c013eb2c6.js" integrity="sha256-QdMSKBcn2Hywzh/kluB/X&#43;CA&#43;IGlBZTU5u/iLAE&#43;ssY="></script><script type="text/javascript" src="/lib/katex/auto-render.min.cb7f4ca60ed5dc3e258415f8c7a3b46d4a93578a52adf83011f18a7f190e7602.js" integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="></script><script type="text/javascript" src="/lib/katex/copy-tex.min.7ad4aa6d2545e3e2f07bc30693f55a9dcd6c47e996bfea8e1bbddfc56c3da7de.js" integrity="sha256-etSqbSVF4&#43;Lwe8MGk/Vanc1sR&#43;mWv&#43;qOG73fxWw9p94="></script><script type="text/javascript" src="/lib/katex/mhchem.min.c1e9e98fb7fdfffc4f4bbd56f2c0235949f39831949bd35f525a4e61538cb207.js" integrity="sha256-wenpj7f9//xPS71W8sAjWUnzmDGUm9NfUlpOYVOMsgc="></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.c79d8f77ec4764afef516c3d319d7b61196ed17cd5d2835c612c65179724f5e0.js" integrity="sha256-x52Pd&#43;xHZK/vUWw9MZ17YRlu0XzV0oNcYSxlF5ck9eA="></script></body>
+</html>

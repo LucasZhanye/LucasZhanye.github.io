@@ -3,7 +3,7 @@
         <title>所有文章 - LucasZhang个人博客</title>
         <link>https://LucasZhanye.github.io/posts/</link>
         <description>所有文章 | LucasZhang个人博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 02 May 2024 22:30:04 &#43;0800</lastBuildDate><atom:link href="https://LucasZhanye.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 09 May 2024 22:36:08 &#43;0800</lastBuildDate><atom:link href="https://LucasZhanye.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>目前为止使用的Obsidian插件</title>
     <link>https://LucasZhanye.github.io/%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%E4%BD%BF%E7%94%A8%E7%9A%84obsidian%E6%8F%92%E4%BB%B6/</link>
     <pubDate>Thu, 02 May 2024 22:30:04 &#43;0800</pubDate>
@@ -26,6 +26,14 @@
     <author>LucasZhang</author>
     <guid>https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/</guid>
     <description><![CDATA[1. 前言 上一篇简单记录了Hugo搭建个人博客，最后总结了发布一篇文章至少需要这几个步骤： 本地生成博客文件(xxx.md)，编辑 本地运行看看效果]]></description>
+</item>
+<item>
+    <title>网络/计算机网络</title>
+    <link>https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/</link>
+    <pubDate>Mon, 22 Apr 2024 23:04:37 &#43;0800</pubDate>
+    <author>LucasZhang</author>
+    <guid>https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/</guid>
+    <description><![CDATA[前言 最近在学习网络相关知识，看了《图解HTTP》这本书，里面提到了HTTPS加密的相关知识，尤其是对称秘钥加密，非对称密钥加密，数字证书，数]]></description>
 </item>
 </channel>
 </rss>
