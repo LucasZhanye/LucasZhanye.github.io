@@ -4,26 +4,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>网络/计算机网络 - LucasZhang个人博客</title><meta name="Description" content=""><meta property="og:title" content="网络/计算机网络" />
+        <title>HTTPS加密原理 - LucasZhang个人博客</title><meta name="Description" content=""><meta property="og:title" content="HTTPS加密原理" />
 <meta property="og:description" content="前言 最近在学习网络相关知识，看了《图解HTTP》这本书，里面提到了HTTPS加密的相关知识，尤其是对称秘钥加密，非对称密钥加密，数字证书，数" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" /><meta property="og:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-22T23:04:37+08:00" />
 <meta property="article:modified_time" content="2024-04-22T23:04:37+08:00" /><meta property="og:site_name" content="LucasZhang个人博客" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta name="twitter:title" content="网络/计算机网络"/>
+<meta name="twitter:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta name="twitter:title" content="HTTPS加密原理"/>
 <meta name="twitter:description" content="前言 最近在学习网络相关知识，看了《图解HTTP》这本书，里面提到了HTTPS加密的相关知识，尤其是对称秘钥加密，非对称密钥加密，数字证书，数"/>
 <meta name="application-name" content="LucasZhang个人博客">
 <meta name="apple-mobile-web-app-title" content="LucasZhang个人博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/logo.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" /><link rel="next" href="https://LucasZhanye.github.io/hugo%E4%B8%8Eobsidian%E6%90%AD%E9%85%8D%E9%A3%9F%E7%94%A8/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css" integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH&#43;KuXHiZWODptY5K8NF4="><link rel="stylesheet" href="/css/style.min.897bb8797133984bdbd3ac834db1a0341c66a8efd95db2216603704f28b76d77.css" integrity="sha256-iXu4eXEzmEvb06yDTbGgNBxmqO/ZXbIhZgNwTyi3bXc="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.0df5a33710e433de1f5415b1d47e4130ca7466aee5b81955f1045c4844bbb3ed.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s&#43;0="><link rel="stylesheet" href="/lib/animate/animate.min.5fbaeb9f8e25d7e0143bae61d4b1802c16ce7390b96ceb2d498b0d96ff4c853f.css" integrity="sha256-X7rrn44l1&#43;AUO65h1LGALBbOc5C5bOstSYsNlv9MhT8="><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "网络/计算机网络",
+        "headline": "HTTPS加密原理",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/LucasZhanye.github.io\/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86\/"
-        },"genre": "posts","keywords": "network","wordcount":  3871 ,
+        },"genre": "posts","keywords": "network","wordcount":  3872 ,
         "url": "https:\/\/LucasZhanye.github.io\/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86\/","datePublished": "2024-04-22T23:04:37+08:00","dateModified": "2024-04-22T23:04:37+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,10 +110,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">网络/计算机网络</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">HTTPS加密原理</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>LucasZhang</a>
 </span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-22">2024-04-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3871 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-22">2024-04-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3872 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -159,7 +159,7 @@ HTTPS=HTTP+SSL/TLS,其实就是采用了加密来保证安全，具体如何加�
 <li>
 <p>什么是对称加密？
 简单的说，对称加密就是指加密和解密使用同一个密钥，这种方式就叫做对称加密。</p>
-<p>对称加密的优点是：算法公开，计算量小，加密速度快，效率高
+<p>对称加密的优点是：算法公开，计算量小，加密速度快，效率高；
 缺点是：没有密钥就无法解密，因此双方必须保存好密钥</p>
 <p>因此只要保证了密钥的安全，那么整个通信过程就可以说是具有保密性的。
 
@@ -351,7 +351,7 @@ HTTPS=HTTP+SSL/TLS,其实就是采用了加密来保证安全，具体如何加�
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="网络/计算机网络" data-hashtags="network"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-hashtag="network"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="网络/计算机网络"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="网络/计算机网络"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="HTTPS加密原理" data-hashtags="network"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-hashtag="network"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="HTTPS加密原理"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/" data-title="HTTPS加密原理"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>

@@ -30,7 +30,7 @@
     <description><![CDATA[1. 前言 上一篇简单记录了Hugo搭建个人博客，最后总结了发布一篇文章至少需要这几个步骤： 本地生成博客文件(xxx.md)，编辑 本地运行看看效果]]></description>
 </item>
 <item>
-    <title>网络/计算机网络</title>
+    <title>HTTPS加密原理</title>
     <link>https://LucasZhanye.github.io/https%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86/</link>
     <pubDate>Mon, 22 Apr 2024 23:04:37 &#43;0800</pubDate>
     <author>LucasZhang</author>
