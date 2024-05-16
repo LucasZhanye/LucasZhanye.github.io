@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Kratos参数验证实践 - LucasZhang个人博客</title><meta name="Description" content=""><meta property="og:title" content="Kratos参数验证实践" />
+<meta property="og:description" content="开发Web应用，参数验证能够帮我们卡掉一些不合法的请求，校验参数的正确与否，能拦截掉无效请求，从而防止错误请求打到后端服务上。 本文介绍使用微" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/" /><meta property="og:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-15T19:58:24+08:00" />
+<meta property="article:modified_time" content="2024-05-15T19:58:24+08:00" /><meta property="og:site_name" content="LucasZhang个人博客" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://LucasZhanye.github.io/%E9%A6%96%E9%A1%B5%E4%B8%AD%E9%97%B4%E7%9A%84%E5%9B%BE%E7%89%87" /><meta name="twitter:title" content="Kratos参数验证实践"/>
+<meta name="twitter:description" content="开发Web应用，参数验证能够帮我们卡掉一些不合法的请求，校验参数的正确与否，能拦截掉无效请求，从而防止错误请求打到后端服务上。 本文介绍使用微"/>
+<meta name="application-name" content="LucasZhang个人博客">
+<meta name="apple-mobile-web-app-title" content="LucasZhang个人博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/logo.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/" /><link rel="prev" href="https://LucasZhanye.github.io/%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%E4%BD%BF%E7%94%A8%E7%9A%84obsidian%E6%8F%92%E4%BB%B6/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.055364f5be272caa092b0e6654c165828707f8ab971e2656383a6d6392bc345e.css" integrity="sha256-BVNk9b4nLKoJKw5mVMFlgocH&#43;KuXHiZWODptY5K8NF4="><link rel="stylesheet" href="/css/style.min.897bb8797133984bdbd3ac834db1a0341c66a8efd95db2216603704f28b76d77.css" integrity="sha256-iXu4eXEzmEvb06yDTbGgNBxmqO/ZXbIhZgNwTyi3bXc="><link rel="stylesheet" href="/lib/fontawesome-free/all.min.0df5a33710e433de1f5415b1d47e4130ca7466aee5b81955f1045c4844bbb3ed.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s&#43;0="><link rel="stylesheet" href="/lib/animate/animate.min.5fbaeb9f8e25d7e0143bae61d4b1802c16ce7390b96ceb2d498b0d96ff4c853f.css" integrity="sha256-X7rrn44l1&#43;AUO65h1LGALBbOc5C5bOstSYsNlv9MhT8="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kratos参数验证实践",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/LucasZhanye.github.io\/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5\/"
+        },"genre": "posts","keywords": "kratos, 微服务","wordcount":  1783 ,
+        "url": "https:\/\/LucasZhanye.github.io\/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5\/","datePublished": "2024-05-15T19:58:24+08:00","dateModified": "2024-05-15T19:58:24+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "LucasZhang"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="normal" data-header-mobile="normal"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="LucasZhang个人博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/logo.png"
+        data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/logo.png"
+        title="/images/logo.png" />LucasZhang个人博客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fa-solid fa-house'></i> 主页 </a><a class="menu-item" href="/posts/"><i class='fa-brands fa-markdown'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fa-solid fa-tags'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fa-solid fa-list'></i> 分类 </a><a class="menu-item" href="https://github.com/LucasZhanye" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="LucasZhang个人博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/logo.png"
+        data-srcset="/images/logo.png, /images/logo.png 1.5x, /images/logo.png 2x"
+        data-sizes="auto"
+        alt="/images/logo.png"
+        title="/images/logo.png" />LucasZhang个人博客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/" title=""><i class='fa-solid fa-house'></i>主页</a><a class="menu-item" href="/posts/" title=""><i class='fa-brands fa-markdown'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fa-solid fa-tags'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fa-solid fa-list'></i>分类</a><a class="menu-item" href="https://github.com/LucasZhanye" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kratos参数验证实践</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>LucasZhang</a>
+</span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>微服务</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-15">2024-05-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1783 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#以前的方式">以前的方式</a></li>
+        <li><a href="#现在的方式">现在的方式</a></li>
+        <li><a href="#说干就干">说干就干</a>
+          <ul>
+            <li><a href="#自定义中间件">自定义中间件</a></li>
+            <li><a href="#自定义校验规则">自定义校验规则</a></li>
+            <li><a href="#注册中间件">注册中间件</a></li>
+            <li><a href="#proto中定义规则">proto中定义规则</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>开发Web应用，参数验证能够帮我们卡掉一些不合法的请求，校验参数的正确与否，能拦截掉无效请求，从而防止错误请求打到后端服务上。</p>
+<p>本文介绍使用微服务框架Kratos如何相对舒服一点的做参数验证。</p>
+<h3 id="以前的方式">以前的方式</h3>
+<p>刚开始接触kratos时，二话不说，直接简单粗暴，就在service层，每一个接口方法里去做参数验证，比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">UserService</span><span class="p">)</span> <span class="nf">Login</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">v1</span><span class="p">.</span><span class="nx">LoginReq</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">v1</span><span class="p">.</span><span class="nx">LoginResp</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">name</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;name 不可为空&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// ....
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">resp</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">uc</span><span class="p">.</span><span class="nf">Login</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Login fail: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">Unwrap</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">resp</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种方式太费劲了，并且每一个都要写（由于每个接口的参数验证都不完全相同），太不优雅了。</p>
+<h3 id="现在的方式">现在的方式</h3>
+<p>以前的方式不够优雅，主要有几个问题：</p>
+<ol>
+<li>参数验证全部自己写</li>
+<li>每一个接口都要写参数验证相关代码
+对于这两个问题，有以下解决方法：</li>
+<li>在golang的领域，已经有比较成熟的参数校验相关的第三方包
+<a href="https://github.com/go-playground/validator" target="_blank">validator</a>
+了，可以直接拿来用，这样可以不需要所有参数验证都自己写，能简化很多代码量</li>
+<li>每个接口都会需要参数验证的情况，可以利用中间件来处理</li>
+</ol>
+<p>再考虑到kratos是使用proto来定义接口以及请求参数的，可以结合第三方工具
+<a href="https://github.com/favadi/protoc-go-inject-tag" target="_blank">protoc-go-inject-tag</a>
+，实现在proto中定义参数时，定义好参数的校验规则。</p>
+<h3 id="说干就干">说干就干</h3>
+<h4 id="自定义中间件">自定义中间件</h4>
+<p>首先，先在Kratos中自定义一个中间件，用来处理参数验证，在<code>internal/pkg/middleware</code>中新建文件<code>validator.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">middleware</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;mytest/cloudapis/mytest&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;sync&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-kratos/kratos/v2/errors&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-kratos/kratos/v2/middleware&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-playground/validator/v10&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-playground/locales/zh&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ut</span> <span class="s">&#34;github.com/go-playground/universal-translator&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">zhTrans</span> <span class="s">&#34;github.com/go-playground/validator/v10/translations/zh&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">gValidate</span> <span class="o">*</span><span class="nx">validator</span><span class="p">.</span><span class="nx">Validate</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">trans</span>     <span class="nx">ut</span><span class="p">.</span><span class="nx">Translator</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">once</span>      <span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// CustomValidator 自定义验证器的结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">CustomValidator</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Field</span>      <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Msg</span>        <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ValidateFn</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">Func</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// RegisterCustomValidators 注册自定义验证器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">registerCustomValidators</span><span class="p">(</span><span class="nx">validate</span> <span class="o">*</span><span class="nx">validator</span><span class="p">.</span><span class="nx">Validate</span><span class="p">,</span> <span class="nx">trans</span> <span class="nx">ut</span><span class="p">.</span><span class="nx">Translator</span><span class="p">,</span> <span class="nx">customValidators</span> <span class="p">[]</span><span class="nx">CustomValidator</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">cv</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">customValidators</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 注册翻译器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">cv</span><span class="p">.</span><span class="nx">Msg</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">validate</span><span class="p">.</span><span class="nf">RegisterTranslation</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">cv</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span> <span class="c1">// 字段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="nx">trans</span><span class="p">,</span>    <span class="c1">// 翻译对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="nf">registerTranslator</span><span class="p">(</span><span class="nx">cv</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span> <span class="s">&#34;{0}&#34;</span><span class="o">+</span><span class="nx">cv</span><span class="p">.</span><span class="nx">Msg</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">translate</span><span class="p">,</span> <span class="c1">// 翻译的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">validate</span><span class="p">.</span><span class="nf">RegisterValidation</span><span class="p">(</span><span class="nx">cv</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span> <span class="nx">cv</span><span class="p">.</span><span class="nx">ValidateFn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">InitValidator</span><span class="p">(</span><span class="nx">customValidators</span> <span class="o">...</span><span class="nx">CustomValidator</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">once</span><span class="p">.</span><span class="nf">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Validate/v10 中文配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">zh</span> <span class="o">:=</span> <span class="nx">zh</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">uni</span> <span class="o">:=</span> <span class="nx">ut</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">zh</span><span class="p">,</span> <span class="nx">zh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">trans</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">uni</span><span class="p">.</span><span class="nf">GetTranslator</span><span class="p">(</span><span class="s">&#34;zh&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 初始化Validate/V10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">gValidate</span> <span class="p">=</span> <span class="nx">validator</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 注册一个获取json tag的自定义方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">gValidate</span><span class="p">.</span><span class="nf">RegisterTagNameFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">fld</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">StructField</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">name</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">SplitN</span><span class="p">(</span><span class="nx">fld</span><span class="p">.</span><span class="nx">Tag</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;json&#34;</span><span class="p">),</span> <span class="s">&#34;,&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">name</span> <span class="o">==</span> <span class="s">&#34;-&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">name</span>
+</span></span><span class="line"><span class="cl">		<span class="p">})</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">		<span class="c1">// 注册默认的翻译器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">err</span> <span class="o">:=</span> <span class="nx">zhTrans</span><span class="p">.</span><span class="nf">RegisterDefaultTranslations</span><span class="p">(</span><span class="nx">gValidate</span><span class="p">,</span> <span class="nx">trans</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">panic</span><span class="p">(</span><span class="s">&#34;Validate/v10 international error: &#34;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 注册自定义验证器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">err</span> <span class="p">=</span> <span class="nf">registerCustomValidators</span><span class="p">(</span><span class="nx">gValidate</span><span class="p">,</span> <span class="nx">trans</span><span class="p">,</span> <span class="nx">customValidators</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">panic</span><span class="p">(</span><span class="s">&#34;Failed to register custom validators: &#34;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// registerTranslator 为自定义字段添加国际化功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">registerTranslator</span><span class="p">(</span><span class="nx">tag</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">msg</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">RegisterTranslationsFunc</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">trans</span> <span class="nx">ut</span><span class="p">.</span><span class="nx">Translator</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">trans</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">msg</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// translate 自定义字段的翻译方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span><span class="nx">trans</span> <span class="nx">ut</span><span class="p">.</span><span class="nx">Translator</span><span class="p">,</span> <span class="nx">fe</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">FieldError</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">msg</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">trans</span><span class="p">.</span><span class="nf">T</span><span class="p">(</span><span class="nx">fe</span><span class="p">.</span><span class="nf">Tag</span><span class="p">(),</span> <span class="nx">fe</span><span class="p">.</span><span class="nf">Field</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">fe</span><span class="p">.(</span><span class="kt">error</span><span class="p">).</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">msg</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Validate 参数校验中间件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Validate</span><span class="p">()</span> <span class="nx">middleware</span><span class="p">.</span><span class="nx">Middleware</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">handler</span> <span class="nx">middleware</span><span class="p">.</span><span class="nx">Handler</span><span class="p">)</span> <span class="nx">middleware</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// do something entering
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nx">err</span> <span class="o">:=</span> <span class="nx">gValidate</span><span class="p">.</span><span class="nf">Struct</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">errs</span> <span class="o">:=</span> <span class="nx">err</span><span class="p">.(</span><span class="nx">validator</span><span class="p">.</span><span class="nx">ValidationErrors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">mytest</span><span class="p">.</span><span class="nx">ErrorReason_ERROR_REASON_PARAMS</span><span class="p">.</span><span class="nf">String</span><span class="p">(),</span> <span class="nx">errs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">Translate</span><span class="p">(</span><span class="nx">trans</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">// do something exiting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从上述代码中，我们定义了一个<code>InitValidator</code>，他接收一个CustomValidator类型切片，这个就是自定义校验规则的结构，支持我们自己定义一些特殊的校验规则：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">CustomValidator</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Field</span>      <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Msg</span>        <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ValidateFn</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">Func</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们只需要实现一个ValidateFn,然后将这个struct在初始化时丢进去，就能够支持我们的自定义的校验规则</p>
+<h4 id="自定义校验规则">自定义校验规则</h4>
+<p>只需要定义一个ValidateFn方法，比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">ValidateQuarter</span><span class="p">(</span><span class="nx">f1</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">FieldLevel</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">field</span> <span class="o">:=</span> <span class="nx">f1</span><span class="p">.</span><span class="nf">Field</span><span class="p">().</span><span class="nf">String</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">regexPattern</span> <span class="o">:=</span> <span class="s">`^Q[1-4]&#39;[0-9]{2}$`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 使用正则表达式进行匹配
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">matched</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">regexp</span><span class="p">.</span><span class="nf">MatchString</span><span class="p">(</span><span class="nx">regexPattern</span><span class="p">,</span> <span class="nx">field</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">matched</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后再丢进<code>InitValidator</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">localMiddleware</span><span class="p">.</span><span class="nf">InitValidator</span><span class="p">(</span><span class="nx">localMiddleware</span><span class="p">.</span><span class="nx">CustomValidator</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Field</span><span class="p">:</span> <span class="s">&#34;quarter&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Msg</span><span class="p">:</span> <span class="s">&#34;季度格式不正确&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ValidateFn</span><span class="p">:</span> <span class="nx">custom</span><span class="p">.</span><span class="nx">ValidateQuarter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="注册中间件">注册中间件</h4>
+<p>定义好中间件后，在http.go和grpc.go中注册这个中间件:
+
+<figure><a class="lightgallery" href="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png" title="image.png" data-thumbnail="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png" data-sub-html="<h2> </h2><p>image.png</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png"
+            data-srcset="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png 1.5x, https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png 2x"
+            data-sizes="auto"
+            alt="https://raw.githubusercontent.com/LucasZhanye/MyNotePic/master/NoteImg/202405152027554-20240515-yhcid6DDwT.png" />
+    </a><figcaption class="image-caption">image.png</figcaption>
+    </figure></p>
+<h4 id="proto中定义规则">proto中定义规则</h4>
+<p>在proto文件中可以这样使用，通过<code>@gotags: validate:&quot;required&quot;</code>的形式设置参数规则，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">message</span> <span class="nx">QueryOEEInfoReq</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;required&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">name</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;required&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">address</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;quarter&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">id</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;quarter&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">quarter</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>已经添加了自定义校验规则的，定义的字段就与<code>validator</code>包默认的字段一样，直接在proto中使用即可</p>
+</blockquote>
+<p>在proto中使用，有几点需要注意：</p>
+<ol>
+<li>如果要嵌套校验，比如一个结构嵌套另一个结构，则需要使用<code>dive</code>标注，比如：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">message</span> <span class="nx">Data</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ID 值 后端生成
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">id</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;required&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="kd">type</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;quarter&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">quarter</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">message</span> <span class="nx">CreateEQTypeReq</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;required&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">id</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// @gotags: validate:&#34;required&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="nx">name</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//@gotags: validate:&#34;required,dive,required&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">repeated</span> <span class="nx">Data</span> <span class="nx">data</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如此一来，data字段里的quarter字段也会校验到。
+2. 编译处理， proto编译需要新增：<code>protoc-go-inject-tag -input=./cloudapis/${NAME}/*/*.pb.go</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-05-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/" data-title="Kratos参数验证实践" data-hashtags="kratos,微服务"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/" data-hashtag="kratos"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/" data-title="Kratos参数验证实践"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/" data-title="Kratos参数验证实践"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kratos/">Kratos</a>,&nbsp;<a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%E4%BD%BF%E7%94%A8%E7%9A%84obsidian%E6%8F%92%E4%BB%B6/" class="prev" rel="prev" title="目前为止使用的Obsidian插件"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>目前为止使用的Obsidian插件</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">LucasZhang</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.d60b69726b8e03fff4c5c6b3cad9ccf49a813379940d6830a96d4ff54fb6fc5f.css" integrity="sha256-1gtpcmuOA//0xcazytnM9JqBM3mUDWgwqW1P9U&#43;2/F8="><link rel="stylesheet" href="/lib/katex/katex.min.4d3844b51f976a58562a47c5dfcdd82ceac8e7434635e22aaf34beab4f1a7eb6.css" integrity="sha256-TThEtR&#43;XalhWKkfF383YLOrI50NGNeIqrzS&#43;q08afrY="><link rel="stylesheet" href="/lib/katex/copy-tex.min.5a4db453d992fe41c67128248d28917b35b97b1a93eb000e2b0c9239a2e8b573.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM="><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.ae2da1bd62c6469ee27770ad1cddf2e8296d8a7f6d85b091463e5200c5e320af.js" integrity="sha256-ri2hvWLGRp7id3CtHN3y6Cltin9thbCRRj5SAMXjIK8="></script><script type="text/javascript" src="/lib/lunr/lunr.min.08a93c0120364b01159db3c287f39b2180bb740334472bda0675bd3f18981676.js" integrity="sha256-CKk8ASA2SwEVnbPCh/ObIYC7dAM0RyvaBnW9PxiYFnY="></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.8127f0ca4cabc7246f3620f3ef3bf9b1db02805dfe03d6d4c57bc74bc0bf6eea.js" integrity="sha256-gSfwykyrxyRvNiDz7zv5sdsCgF3&#43;A9bUxXvHS8C/buo="></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.825fab54c26891370cbd3df4cdff5c9de31af8bb84474e6774573463d8708ae7.js" integrity="sha256-gl&#43;rVMJokTcMvT30zf9cneMa&#43;LuER05ndFc0Y9hwiuc="></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.6e61be2f374a0122510025578940baf7ef8dbbcaf3ecc5f5535cfc81bd1cfd39.js" integrity="sha256-bmG&#43;LzdKASJRACVXiUC69&#43;&#43;Nu8rz7MX1U1z8gb0c/Tk="></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.ac9ce102394282124a4a4c78980bf7570560c434806cd334007ecf84fe1c0e7b.js" integrity="sha256-rJzhAjlCghJKSkx4mAv3VwVgxDSAbNM0AH7PhP4cDns="></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-thumbnail.min.585cc139c484b8de6d2e75af9d852f6b83f73a53742029e02f25eaf8b34d0c16.js" integrity="sha256-WFzBOcSEuN5tLnWvnYUva4P3OlN0ICngLyXq&#43;LNNDBY="></script><script type="text/javascript" src="/lib/lightgallery/plugins/lg-zoom.min.196d42fafedd774e5000cc21bf24dc1b5162c6c625651f68bc7259a5203c7461.js" integrity="sha256-GW1C&#43;v7dd05QAMwhvyTcG1FixsYlZR9ovHJZpSA8dGE="></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.e17a1d816e13c0826e0ed7febfabc3277f45571234bde0bf9120829a7169edc9.js" integrity="sha256-4XodgW4TwIJuDtf&#43;v6vDJ39FVxI0veC/kSCCmnFp7ck="></script><script type="text/javascript" src="/lib/sharer/sharer.min.cc31d902aa4f3fcc8bb8c81aa534a4e2103e9b11f65b9fbd5b7156e089889ceb.js" integrity="sha256-zDHZAqpPP8yLuMgapTSk4hA&#43;mxH2W5&#43;9W3FW4ImInOs="></script><script type="text/javascript" src="/lib/katex/katex.min.41d312281727d87cb0ce1fe496e07f5fe080f881a50594d4e6efe22c013eb2c6.js" integrity="sha256-QdMSKBcn2Hywzh/kluB/X&#43;CA&#43;IGlBZTU5u/iLAE&#43;ssY="></script><script type="text/javascript" src="/lib/katex/auto-render.min.cb7f4ca60ed5dc3e258415f8c7a3b46d4a93578a52adf83011f18a7f190e7602.js" integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="></script><script type="text/javascript" src="/lib/katex/copy-tex.min.7ad4aa6d2545e3e2f07bc30693f55a9dcd6c47e996bfea8e1bbddfc56c3da7de.js" integrity="sha256-etSqbSVF4&#43;Lwe8MGk/Vanc1sR&#43;mWv&#43;qOG73fxWw9p94="></script><script type="text/javascript" src="/lib/katex/mhchem.min.c1e9e98fb7fdfffc4f4bbd56f2c0235949f39831949bd35f525a4e61538cb207.js" integrity="sha256-wenpj7f9//xPS71W8sAjWUnzmDGUm9NfUlpOYVOMsgc="></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.c79d8f77ec4764afef516c3d319d7b61196ed17cd5d2835c612c65179724f5e0.js" integrity="sha256-x52Pd&#43;xHZK/vUWw9MZ17YRlu0XzV0oNcYSxlF5ck9eA="></script></body>
+</html>

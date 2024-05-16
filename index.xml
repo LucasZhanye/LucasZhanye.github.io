@@ -6,6 +6,14 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 15 May 2024 19:58:24 &#43;0800</lastBuildDate>
             <atom:link href="https://LucasZhanye.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Kratos参数验证实践</title>
+    <link>https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/</link>
+    <pubDate>Wed, 15 May 2024 19:58:24 &#43;0800</pubDate>
+    <author>LucasZhang</author>
+    <guid>https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/</guid>
+    <description><![CDATA[开发Web应用，参数验证能够帮我们卡掉一些不合法的请求，校验参数的正确与否，能拦截掉无效请求，从而防止错误请求打到后端服务上。 本文介绍使用微]]></description>
+</item>
+<item>
     <title>目前为止使用的Obsidian插件</title>
     <link>https://LucasZhanye.github.io/%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%E4%BD%BF%E7%94%A8%E7%9A%84obsidian%E6%8F%92%E4%BB%B6/</link>
     <pubDate>Thu, 02 May 2024 22:30:04 &#43;0800</pubDate>

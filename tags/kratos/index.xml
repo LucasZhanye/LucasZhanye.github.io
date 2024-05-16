@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Kratos - 标签 - LucasZhang个人博客</title>
+        <link>https://LucasZhanye.github.io/tags/kratos/</link>
+        <description>Kratos - 标签 - LucasZhang个人博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 15 May 2024 19:58:24 &#43;0800</lastBuildDate><atom:link href="https://LucasZhanye.github.io/tags/kratos/" rel="self" type="application/rss+xml" /><item>
+    <title>Kratos参数验证实践</title>
+    <link>https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/</link>
+    <pubDate>Wed, 15 May 2024 19:58:24 &#43;0800</pubDate>
+    <author>LucasZhang</author>
+    <guid>https://LucasZhanye.github.io/kratos%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%E5%AE%9E%E8%B7%B5/</guid>
+    <description><![CDATA[开发Web应用，参数验证能够帮我们卡掉一些不合法的请求，校验参数的正确与否，能拦截掉无效请求，从而防止错误请求打到后端服务上。 本文介绍使用微]]></description>
+</item>
+</channel>
+</rss>
