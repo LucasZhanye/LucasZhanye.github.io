@@ -6,7 +6,7 @@
 
 ### 以前的方式
 刚开始接触kratos时，二话不说，直接简单粗暴，就在service层，每一个接口方法里去做参数验证，比如：
-```go
+```go fold
 func (s *UserService) Login(ctx context.Context, req *v1.LoginReq) (*v1.LoginResp, error) {
 	if req.name != "" {
 		return nil, errors.New("name 不可为空")
@@ -31,6 +31,7 @@ func (s *UserService) Login(ctx context.Context, req *v1.LoginReq) (*v1.LoginRes
 以前的方式不够优雅，主要有几个问题：
 1. 参数验证全部自己写
 2. 每一个接口都要写参数验证相关代码
+
 对于这两个问题，有以下解决方法：
 1. 在golang的领域，已经有比较成熟的参数校验相关的第三方包[validator](https://github.com/go-playground/validator)了，可以直接拿来用，这样可以不需要所有参数验证都自己写，能简化很多代码量
 2. 每个接口都会需要参数验证的情况，可以利用中间件来处理
@@ -40,7 +41,7 @@ func (s *UserService) Login(ctx context.Context, req *v1.LoginReq) (*v1.LoginRes
 ### 说干就干
 #### 自定义中间件
 首先，先在Kratos中自定义一个中间件，用来处理参数验证，在`internal/pkg/middleware`中新建文件`validator.go`
-```go
+```go fold
 package middleware
 
 import (
@@ -238,7 +239,8 @@ message CreateEQTypeReq {
   repeated Data data = 3;
 }
 ```
-如此一来，data字段里的quarter字段也会校验到。
+> 如此一来，data字段里的quarter字段也会校验到。
+
 2. 编译处理， proto编译需要新增：`protoc-go-inject-tag -input=./cloudapis/${NAME}/*/*.pb.go` 
 
 
